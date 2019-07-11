@@ -1,0 +1,36 @@
+[IaaS windows VM using managed disk from custom image]
+   
+This template deploys a Windows VM from a Custom Image using Managed Disk
+
+ManagedDisks
+
+Tags: [Windows]
+
+Endpoint	Version	Validated
+Microsoft Azure Stack	-	yes
+Prerequisites
+AzureStack must be 1901 or greater to support Custom Images
+
+Prepare or Download a Customized Windows Image Template Follow the below links to create/download a Windows Image
+
+https://azure.microsoft.com/en-us/documentation/articles/azure-stack-Windows/
+https://azure.microsoft.com/en-us/documentation/articles/azure-stack-add-image-pir/
+Deployment Options
+for all deployments, a vhd file and a ssh public key is required. the powershell script option reads the key from a specified sshKeyfile ( your_keyfile.pub)
+
+ResourceGroup
+
+Deploy to Azure Stack portal using custom deployment Upload the Image to a Storage Account, with Public read Access During Deployment, Specify the imageUri Parameter of the vhd Deploy the Image using the Quickstart templates from Template Deployment template
+
+Deploy through Visual Studio Upload the Image to a Storage Account, with Public read Access During Deployment, Specify the imageUri Parameter of the vhd use the azuredeploy.json and azuredeploy.parameters.json to deploy
+
+Deploy the solution from PowerShell with the following PowerShell script
+
+Follow the below link to configure the Azure Stack environment with Add-AzureRmEnvironment cmdlet and authenticate a user to the environment https://docs.microsoft.com/en-us/azure/azure-stack/azure-stack-powershell-configure
+
+the ExampleScript will create
+
+a Storage Account and Image Resource Group ( Default: image in image_rg)
+upload the Windows Image
+Deploy the vhd to Deployment resource Group
+.\deploy_image.ps1 -Image $HOME\Downloads\MyWindowsVM.vhd
